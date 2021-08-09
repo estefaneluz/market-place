@@ -1,14 +1,16 @@
 import { TextField, Typography, Button } from '@material-ui/core';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom'
+import { AuthContext } from '../../contexts/AuthContext';
 import { Alert } from '@material-ui/lab';
 import { useForm } from 'react-hook-form'
-import { Link, useHistory } from 'react-router-dom'
 import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 
 export default function Login(){
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('');
+    const { setToken } = useContext(AuthContext);
     const history = useHistory();
     const styles = useStyles();
 
@@ -24,6 +26,7 @@ export default function Login(){
 
         const response = await request.json();
         if(request.ok){
+            setToken(response.token);
             return history.push("/home");
         }
 
