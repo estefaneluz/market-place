@@ -1,6 +1,7 @@
-import useStyles from "../../styles/form";
 import { TextField, Typography, Button } from '@material-ui/core';
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 
 export default function Login(){
@@ -31,7 +32,7 @@ export default function Login(){
                     <Button type="submit" variant="contained" color="primary">
                         Entrar
                     </Button>
-                    <p>Primeira vez aqui? <a href="#">Crie uma conta</a></p>
+                    <p>Primeira vez aqui? <Link to="/cadastro">Crie uma conta</Link></p>
                 </div>
             </form>
         </div>
