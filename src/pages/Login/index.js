@@ -10,12 +10,14 @@ import Password from "../../components/Password";
 export default function Login(){
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('');
-    const { setToken } = useContext(AuthContext);
+    const { setToken, setLoading } = useContext(AuthContext);
     const history = useHistory();
     const styles = useStyles();
 
     const login = async (data) => {
         setError('');
+        setLoading(true);
+
         const request = await fetch('https://desafio-m03.herokuapp.com/login', {
             method: "POST",
             body: JSON.stringify(data),
@@ -23,8 +25,10 @@ export default function Login(){
                 'Content-type': 'application/json'
             }
         });
-
+    
+        setLoading(false)
         const response = await request.json();
+
         if(request.ok){
             setToken(response.token);
             return history.push("/home");
