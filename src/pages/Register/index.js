@@ -12,7 +12,7 @@ export default function Register(){
         <div className={`${styles.container} ${styles.margin}`}>
             <form className={styles.form} >
                 <Typography variant="h4" component="h2">
-                    Crie uma conta
+                    Criar uma conta
                 </Typography>
                 <TextField 
                     {...register("nome", {required: true})}
@@ -41,8 +41,11 @@ export default function Register(){
                     id="senha" label="Repita a senha" 
                 />
                 <div className={styles.action}>
-                    <Button type="submit" variant="contained" color="primary">
-                        Entrar
+                    <Button
+                        className={styles.button} 
+                        type="submit" 
+                        variant="contained" color="primary">
+                        Criar conta
                     </Button>
                     <p>Já possui uma conta? <Link to="/">Acesse</Link></p>
                 </div>

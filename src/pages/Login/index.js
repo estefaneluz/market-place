@@ -29,7 +29,11 @@ export default function Login(){
                     error={!!errors.senha}
                     id="senha" label="Senha" />
                 <div className={styles.action}>
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button 
+                        className={styles.button}
+                        type="submit" 
+                        variant="contained" 
+                        color="primary">
                         Entrar
                     </Button>
                     <p>Primeira vez aqui? <Link to="/cadastro">Crie uma conta</Link></p>

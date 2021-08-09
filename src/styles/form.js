@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     container: {
         minHeight: "100vh",
         display: "grid",
@@ -11,9 +11,9 @@ const useStyles = makeStyles({
         placeContent: "center",
         backgroundColor: "#fff",
         borderRadius: 16, 
-        boxShadow: `box-shadow: 0px 8px 9px -5px rgba(0, 0, 0, 0.2), 
-        0px 15px 22px 2px rgba(0, 0, 0, 0.14), 
-        0px 6px 28px 5px rgba(0, 0, 0, 0.12)`,
+        boxShadow: `0px 8px 9px -5px rgba(0, 0, 0, 0.1), 
+        0px 8px 10px 2px rgba(0, 0, 0, 0.03), 
+        0px 6px 28px 5px rgba(0, 0, 0, 0.10)`,
         padding: "10vh 5vw",
         rowGap: 40,
         textAlign: "center",
@@ -25,12 +25,19 @@ const useStyles = makeStyles({
         fontSize: "0.78em",
         fontFamily: "Arial",
         "& a":{
-            textTransform: "uppercase"
+            textTransform: "uppercase",
+            color: "#007DFF",
+        }
+    },
+    button: {
+        backgroundColor: "#007DFF",
+        "&:hover": {
+            backgroundColor: "#0471E3"
         }
     },
     margin: {
         margin: "10vh 1vw",
     }
-});
+}));
 
 export default useStyles;
