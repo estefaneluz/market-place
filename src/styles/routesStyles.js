@@ -4,5 +4,8 @@ export const useStyles = makeStyles((theme)=>({
     backdrop: {
         zIndex: theme.zIndex.drawer + 3,
         color: '#fff',
+    },
+    content: {
+        padding: "78px 0 0 200px"
     }
 }));

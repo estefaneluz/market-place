@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { Backdrop, CircularProgress } from "@material-ui/core"
+import { Backdrop, CircularProgress, Typography } from "@material-ui/core"
 import { useState, useContext } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import { useStyles } from "./styles/routesStyles";
@@ -18,7 +18,7 @@ export default function Routes() {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
   const valueContext = { token, setToken, loading, setLoading }
-  const classes = useStyles();
+  const styles = useStyles();
   
   return (
     <AuthContext.Provider value={valueContext}>
@@ -29,11 +29,14 @@ export default function Routes() {
 
           <ProtectedRoutes>
             <SideNav/>
-            <Route path="/produtos"/>
+            <main className={styles.content}>
+              <Typography variant="h2" component="h1">Loja da Maria</Typography>
+              <Route path="/produtos"/>
+            </main>
           </ProtectedRoutes>
         </Switch>
 
-        <Backdrop className={classes.backdrop} open={loading} onClick={()=>setLoading(false)}>
+        <Backdrop className={styles.backdrop} open={loading} onClick={()=>setLoading(false)}>
               <CircularProgress color="inherit" />
         </Backdrop>
       </Router>
