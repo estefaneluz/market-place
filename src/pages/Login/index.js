@@ -31,7 +31,7 @@ export default function Login(){
 
         if(request.ok){
             setToken(response.token);
-            return history.push("/home");
+            return history.push("/produtos");
         }
 
         return setError(response);

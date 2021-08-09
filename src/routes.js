@@ -5,6 +5,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import { useStyles } from "./styles/routesStyles";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import SideNav from "./components/SideNav";
 
 const ProtectedRoutes = (props) => {
   const { token } = useContext(AuthContext);
@@ -27,6 +28,7 @@ export default function Routes() {
           <Route path="/cadastro"  component={Register}/>
 
           <ProtectedRoutes>
+            <SideNav/>
             <Route path="/produtos"/>
           </ProtectedRoutes>
         </Switch>
