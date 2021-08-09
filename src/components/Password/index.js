@@ -9,19 +9,22 @@ export default function Password(props){
         <FormControl>
             <InputLabel 
                 htmlFor={props.id}
+                error={props.error}
             >
                 {props.label}
             </InputLabel>
             <Input
-            id={props.id}
-            type={showPassword ? 'text' : 'password'}
-            endAdornment={
-                <InputAdornment position="end">
-                <IconButton aria-label="Toggle password visibility" onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-                </InputAdornment>
-            }
+                id={props.id}
+                type={showPassword ? 'text' : 'password'}
+                {...props.register()}
+                error={props.error}
+                endAdornment={
+                    <InputAdornment position="end">
+                    <IconButton aria-label="Toggle password visibility" onClick={() => setShowPassword(!showPassword)}>
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                    </InputAdornment>
+                }
             />
         </FormControl>
     );
