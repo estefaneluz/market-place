@@ -7,13 +7,19 @@ import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 
 export default function Register(){
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [error, setError] = useState('');
+    const { register, handleSubmit, formState: { errors }, setError } = useForm();
+    const [errorMessage, setErrorMessage] = useState('');
     const styles = useStyles();
+
+    const userRegister = async (data)=> {
+        if(data.senha !== data.repetir_senha){
+
+        }
+    }
 
     return (
         <div className={`${styles.container} ${styles.margin}`}>
-            <form className={styles.form} >
+            <form className={styles.form} onSubmit={handleSubmit(userRegister)}>
                 <Typography variant="h4" component="h2">
                     Criar uma conta
                 </Typography>
@@ -43,9 +49,9 @@ export default function Register(){
                     error={!!errors.repetir_senha}
                     id="senha" label="Repita a senha" 
                 />
-                {!!error && 
-                <Alert onClose={() => setError('')} severity="error">
-                    {error}
+                {!!errorMessage && 
+                <Alert onClose={() => setErrorMessage('')} severity="error">
+                    {errorMessage}
                 </Alert>}
                 <div className={styles.action}>
                     <Button
