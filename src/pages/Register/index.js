@@ -1,4 +1,6 @@
-import { TextField, Typography, Button } from '@material-ui/core';
+import { TextField, Typography, Button, Snackbar } from '@material-ui/core';
+import { useState } from 'react';
+import { Alert } from '@material-ui/lab';
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import useStyles from "../../styles/form";
@@ -6,6 +8,7 @@ import Password from "../../components/Password";
 
 export default function Register(){
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [error, setError] = useState('');
     const styles = useStyles();
 
     return (
@@ -40,6 +43,10 @@ export default function Register(){
                     error={!!errors.repetir_senha}
                     id="senha" label="Repita a senha" 
                 />
+                {!!error && 
+                <Alert onClose={() => setError('')} severity="error">
+                    {error}
+                </Alert>}
                 <div className={styles.action}>
                     <Button
                         className={styles.button} 
