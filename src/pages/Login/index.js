@@ -8,13 +8,13 @@ export default function Login(){
     const { register, handleSubmit, formState: { errors } } = useForm();
     const styles = useStyles();
 
-    const Login = (data) => {
+    const login = (data) => {
         console.log(data)
     }
 
     return (
         <div className={styles.container}>
-            <form className={styles.form} onSubmit={handleSubmit(Login)}>
+            <form className={styles.form} onSubmit={handleSubmit(login)}>
                 <Typography variant="h4" component="h2">
                     Login
                 </Typography>

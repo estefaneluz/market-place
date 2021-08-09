@@ -9,7 +9,7 @@ export default function Register(){
     const styles = useStyles();
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${styles.margin}`}>
             <form className={styles.form} >
                 <Typography variant="h4" component="h2">
                     Crie uma conta

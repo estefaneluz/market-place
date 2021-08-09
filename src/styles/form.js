@@ -4,7 +4,7 @@ const useStyles = makeStyles({
     container: {
         minHeight: "100vh",
         display: "grid",
-        placeContent: "center"
+        placeContent: "center",
     },
     form: {
         display: "grid",
@@ -27,6 +27,9 @@ const useStyles = makeStyles({
         "& a":{
             textTransform: "uppercase"
         }
+    },
+    margin: {
+        margin: "10vh 1vw",
     }
 });
 
