@@ -1,6 +1,6 @@
 import useStyles from "../../styles/form";
 import { TextField, Typography, Button } from '@material-ui/core';
-
+import Password from "../../components/Password";
 
 export default function Login(){
     const styles = useStyles();
@@ -14,6 +14,7 @@ export default function Login(){
                 <TextField 
                     label="E-mail" 
                 />
+                <Password id="senha" label="Senha" />
                 <div className={styles.action}>
                     <Button variant="contained" color="primary">
                         Entrar
