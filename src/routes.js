@@ -1,7 +1,7 @@
+import Login from "./pages/Login";
+
 export default function Routes() {
   return (
-    <div>
-      Olá, mundo!
-    </div>
+    <Login/>
   );
 }
