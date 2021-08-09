@@ -13,7 +13,10 @@ export default function Register(){
 
     const userRegister = async (data)=> {
         if(data.senha !== data.repetir_senha){
-
+            setError("senha", {type: "validate"}, {shouldFocus: true});
+            setError("repetir_senha", {type:"validate"}, {shouldFocus: false});
+            setErrorMessage("As senhas devem ser iguais!");
+            return;
         }
     }
 
