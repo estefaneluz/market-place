@@ -34,7 +34,7 @@ export default function Register(){
         }
 
         const response = await request.json();
-        setErrorMessage(response);
+        return setErrorMessage(response);
     }
 
     return (

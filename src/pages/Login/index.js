@@ -2,17 +2,32 @@ import { TextField, Typography, Button } from '@material-ui/core';
 import { useState } from 'react';
 import { Alert } from '@material-ui/lab';
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 
 export default function Login(){
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [error, setError] = useState('');
+    const history = useHistory();
     const styles = useStyles();
 
-    const login = (data) => {
-        console.log(data)
+    const login = async (data) => {
+        setError('');
+        const request = await fetch('https://desafio-m03.herokuapp.com/login', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+
+        const response = await request.json();
+        if(request.ok){
+            return history.push("/home");
+        }
+
+        return setError(response);
     }
 
     return (
