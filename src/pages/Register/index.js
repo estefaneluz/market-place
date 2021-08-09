@@ -1,14 +1,15 @@
-import { TextField, Typography, Button, Snackbar } from '@material-ui/core';
+import { TextField, Typography, Button } from '@material-ui/core';
 import { useState } from 'react';
 import { Alert } from '@material-ui/lab';
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 
 export default function Register(){
     const { register, handleSubmit, formState: { errors }, setError } = useForm();
     const [errorMessage, setErrorMessage] = useState('');
+    const history = useHistory();
     const styles = useStyles();
 
     const userRegister = async (data)=> {
@@ -18,6 +19,22 @@ export default function Register(){
             setErrorMessage("As senhas devem ser iguais!");
             return;
         }
+
+        setErrorMessage('');
+        const request = await fetch('https://desafio-m03.herokuapp.com/usuarios', {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+
+        if(request.ok) {
+            return history.push('/'); 
+        }
+
+        const response = await request.json();
+        setErrorMessage(response);
     }
 
     return (

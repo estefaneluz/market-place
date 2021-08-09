@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         0px 6px 28px 5px rgba(0, 0, 0, 0.10)`,
         padding: "10vh 5vw",
         rowGap: 40,
-        textAlign: "center",
+        maxWidth: 420,
     },
     action: {
         display: "grid",
