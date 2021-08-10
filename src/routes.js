@@ -30,13 +30,15 @@ export default function Routes() {
           <Route path="/cadastro"  component={Register}/>
 
           <ProtectedRoutes>
-            <SideNav/>
-            <main className={styles.content}>
-              <Typography variant="h2" component="h1">Loja da Maria</Typography>
-              <Route path="/produtos"/>
-              <Route path="/perfil" component={Profile}/>
-              <ActionButtons/>
-            </main>
+            <div className={styles.wraper}>
+              <SideNav/>
+              <main className={styles.content}>
+                <Typography variant="h2" component="h1">Loja da Maria</Typography>
+                <Route path="/produtos"/>
+                <Route path="/perfil" component={Profile}/>
+                <ActionButtons/>
+              </main>
+            </div>
           </ProtectedRoutes>
         </Switch>
 
