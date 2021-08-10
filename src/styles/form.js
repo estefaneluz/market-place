@@ -25,10 +25,10 @@ const useStyles = makeStyles(theme => ({
         color: "rgb(0,0,0,0.8)",
         fontSize: "0.78em",
         fontFamily: "Arial",
-        "& a":{
-            textTransform: "uppercase",
-            color: "#007DFF",
-        }
+    },
+    link: {
+        textTransform: "uppercase",
+        color: "#007DFF"
     },
     button: {
         backgroundColor: "#007DFF",

@@ -1,6 +1,7 @@
 import { Typography, TextField } from "@material-ui/core";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import Footer from "../../components/Footer"
 import useStyles  from "../../styles/form"; 
 
 export default function Profile(){

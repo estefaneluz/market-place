@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import SideNav from "./components/SideNav";
+import Footer from "./components/Footer";
 
 const ProtectedRoutes = (props) => {
   const { token } = useContext(AuthContext);
@@ -35,6 +36,7 @@ export default function Routes() {
               <Route path="/produtos"/>
               <Route path="/perfil" component={Profile}/>
             </main>
+            <Footer/>
           </ProtectedRoutes>
         </Switch>
 

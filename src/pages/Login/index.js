@@ -65,7 +65,8 @@ export default function Login(){
                         color="primary">
                         Entrar
                     </Button>
-                    <p>Primeira vez aqui? <Link to="/cadastro">Crie uma conta</Link></p>
+                    <p>Primeira vez aqui? <Link to="/cadastro" 
+                        className={styles.link}>Crie uma conta</Link></p>
                 </div>
             </form>
         </div>

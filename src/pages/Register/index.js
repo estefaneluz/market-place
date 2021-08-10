@@ -80,7 +80,7 @@ export default function Register(){
                         variant="contained" color="primary">
                         Criar conta
                     </Button>
-                    <p>Já possui uma conta? <Link to="/">Acesse</Link></p>
+                    <p>Já possui uma conta? <Link to="/" className={styles.link}>Acesse</Link></p>
                 </div>
             </form>
         </div>
