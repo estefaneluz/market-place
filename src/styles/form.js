@@ -38,6 +38,11 @@ const useStyles = makeStyles(theme => ({
     },
     margin: {
         margin: "10vh 1vw",
+    },
+    column: {
+        display: "flex", 
+        flexDirection: "column",
+        rowGap: 48
     }
 }));
 

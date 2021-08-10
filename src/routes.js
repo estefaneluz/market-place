@@ -5,6 +5,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import { useStyles } from "./styles/routesStyles";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 import SideNav from "./components/SideNav";
 
 const ProtectedRoutes = (props) => {
@@ -32,6 +33,7 @@ export default function Routes() {
             <main className={styles.content}>
               <Typography variant="h2" component="h1">Loja da Maria</Typography>
               <Route path="/produtos"/>
+              <Route path="/perfil" component={Profile}/>
             </main>
           </ProtectedRoutes>
         </Switch>

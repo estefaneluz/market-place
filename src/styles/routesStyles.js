@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme)=>({
         color: '#fff',
     },
     content: {
-        padding: "78px 0 0 200px"
+        padding: "78px 0 0 78px",
+        display: "grid", 
+        rowGap: 60,
+        maxWidth: 490
     }
 }));
