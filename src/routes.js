@@ -30,7 +30,7 @@ export default function Routes() {
           <Route path="/cadastro"  component={Register}/>
 
           <ProtectedRoutes>
-            <div className={styles.wraper}>
+            <div className={styles.wrapper}>
               <SideNav/>
               <main className={styles.content}>
                 <Typography variant="h2" component="h1">Loja da Maria</Typography>

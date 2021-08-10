@@ -1,8 +1,9 @@
-.footer {
+.actionButtons {
     margin-bottom: 30px;
+    width: 100%;
 }
 
-.footer hr {
+.actionButtons hr {
     margin: 30px 0
 }
 

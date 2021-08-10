@@ -42,7 +42,8 @@ const useStyles = makeStyles(theme => ({
     column: {
         display: "flex", 
         flexDirection: "column",
-        rowGap: 48
+        rowGap: 48,
+        maxWidth: 380,
     }
 }));
 
