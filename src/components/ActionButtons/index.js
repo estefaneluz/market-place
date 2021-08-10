@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import useStyles from "../../styles/form"
 import "./styles.css"
 
-export default function Footer(){
+export default function ActionButtons(){
     const styles = useStyles();
     const location = useLocation();
     return(

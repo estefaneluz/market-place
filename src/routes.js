@@ -7,7 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import SideNav from "./components/SideNav";
-import Footer from "./components/Footer";
+import ActionButtons from "./components/ActionButtons";
 
 const ProtectedRoutes = (props) => {
   const { token } = useContext(AuthContext);
@@ -35,8 +35,8 @@ export default function Routes() {
               <Typography variant="h2" component="h1">Loja da Maria</Typography>
               <Route path="/produtos"/>
               <Route path="/perfil" component={Profile}/>
+              <ActionButtons/>
             </main>
-            <Footer/>
           </ProtectedRoutes>
         </Switch>
 

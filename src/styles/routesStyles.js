@@ -9,6 +9,5 @@ export const useStyles = makeStyles((theme)=>({
         padding: "78px 0 0 78px",
         display: "grid", 
         rowGap: 60,
-        maxWidth: 490
-    }
+    },
 }));

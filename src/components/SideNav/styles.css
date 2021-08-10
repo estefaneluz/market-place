@@ -1,3 +1,7 @@
+#root {
+    min-height: inherit;
+}
+
 .sidenav {
     display: flex;
     flex-direction: column;
