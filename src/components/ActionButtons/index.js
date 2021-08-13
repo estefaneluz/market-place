@@ -3,19 +3,16 @@ import { Link, useLocation, useHistory } from "react-router-dom"
 import useStyles from "../../styles/form"
 import "./styles.css"
 
-export default function ActionButtons(){
+export default function ActionButtons({onSubmit}){
     const styles = useStyles();
     const history = useHistory();
     const { pathname } = useLocation();
     const link = pathname.includes("produtos") ? "/produtos" : "/perfil"
 
     const defineRoute = () => {
-        // if(pathname.includes("/novo"))
-        //    return; //add funcao
-        // else if (pathname.includes("/editar"))
-        //     return; //add funcao
-        //else 
-        if (pathname === "/perfil") 
+        if(pathname.includes("/novo") || pathname.includes("/editar"))
+           return onSubmit();
+        else if (pathname === "/perfil") 
             return history.push("/perfil/editar");
         else if (pathname === "/produtos") 
             return history.push("/produtos/novo");
@@ -28,7 +25,6 @@ export default function ActionButtons(){
             { (pathname.includes("novo") || pathname.includes("editar"))
             && <Link to={link} className={styles.link}>Cancelar</Link> }
             <Button 
-                type="submit"
                 onClick={() => defineRoute()}
                 className={styles.button}
                 variant="contained" 

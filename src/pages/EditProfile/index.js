@@ -9,34 +9,38 @@ export default function EditProfile(){
 
     const styles = useStyles();
 
-    const obSubmit = (data) => {
+    const onSubmit = (data) => {
         console.log(data);
     }
+    
     return (
         <>
         <Typography variant="h4" component="h2"> Editar Perfil </Typography>
-        <form className={styles.column} onSubmit={() => handleSubmit(onsubmit)}>
+        <form className={styles.column} >
             <TextField  
+                {...register("nome", {required: true})}
                 label="Seu nome" 
             />
             <TextField 
+                {...register("nome_loja", {required: true})}
                 label="Nome da loja"
             />
             <TextField 
+                {...register("email", {required: true})}
                 label="E-mail"
                 type="email" 
             />
             <Password
-                register={() => register("senha")}
+                register={() => register("senha", {required: true})}
                 error={!!errors.senha}
                 id="senha" label="Nova senha"
             />
             <Password
-                register={() => register("repetir_senha")}
+                register={() => register("repetir_senha", {required: true})}
                 error={!!errors.senha}
                 id="repetir_senha" label="Repita a nova senha"
             />
-            <ActionButtons/>
+            <ActionButtons onSubmit={handleSubmit(onSubmit)}/>
         </form>
         </>
     );
