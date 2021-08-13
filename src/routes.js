@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { Backdrop, CircularProgress, Typography } from "@material-ui/core"
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import { useStyles } from "./styles/routesStyles";
 import Login from "./pages/Login";

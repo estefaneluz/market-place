@@ -1,5 +1,5 @@
 import { Typography, TextField } from "@material-ui/core";
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from 'react-router-dom';
@@ -40,11 +40,10 @@ export default function EditProfile(){
             }
         });
         setLoading(false);
-        const response = await request.json();
-        console.log(response);
         if(request.ok) {
             return history.push('/perfil'); 
         }
+        const response = await request.json();
         return setErrorMessage(response);
     }
     
