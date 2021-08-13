@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { Backdrop, CircularProgress, Typography } from "@material-ui/core"
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import { useStyles } from "./styles/routesStyles";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import SideNav from "./components/SideNav";
-import ActionButtons from "./components/ActionButtons";
 import EditProfile from "./pages/EditProfile";
 
 const ProtectedRoutes = (props) => {
@@ -20,7 +19,8 @@ const ProtectedRoutes = (props) => {
 export default function Routes() {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
-  const valueContext = { token, setToken, loading, setLoading }
+  const [user, setUser] = useState({});
+  const valueContext = { token, setToken, loading, setLoading, user, setUser }
   const styles = useStyles();
   
   return (
@@ -38,7 +38,6 @@ export default function Routes() {
                 <Route path="/produtos"/>
                 <Route path="/perfil" exact component={Profile}/>
                 <Route path="/perfil/editar" component={EditProfile}/>
-                {/* <ActionButtons/>  */}
               </main>
             </div>
           </ProtectedRoutes>

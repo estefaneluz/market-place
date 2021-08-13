@@ -2,31 +2,15 @@ import { Typography, TextField } from "@material-ui/core";
 import { useState, useEffect, useContext } from "react";
 import ActionButtons from "../../components/ActionButtons";
 import { AuthContext } from "../../contexts/AuthContext";
+import { getUserData } from "../../functions/getUserData";
 import useStyles  from "../../styles/form"; 
 
 export default function Profile(){
-    const [user, setUser] = useState({});
-    const { token, setLoading } = useContext(AuthContext);
+    const { token, setLoading, setUser, user } = useContext(AuthContext);
     const styles = useStyles();
 
-    const getUserData = async () =>{
-        setLoading(true);
-
-        const request = await fetch('https://desafio-m03.herokuapp.com/perfil/', {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        });
-
-        setLoading(false);
-        
-        const response = await request.json();
-        return setUser(response);
-    }
-
     useEffect(()=> {
-        getUserData();
+        getUserData(setLoading, setUser, token);
     }, [])
 
     return (
