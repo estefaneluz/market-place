@@ -9,8 +9,13 @@ import { Link, useLocation } from "react-router-dom"
 import "./styles.css"
 
 export default function SideNav(){
-    const { setToken } = useContext(AuthContext);
+    const { setToken, setUser } = useContext(AuthContext);
     const location = useLocation();
+
+    const logout = () => {
+        setUser({});
+        setToken('');
+    }
 
     return (
         <aside className="sidenav">
@@ -24,7 +29,7 @@ export default function SideNav(){
                     src={location.pathname ==="/perfil" || location.pathname ==="/perfil/editar"? user_selected_img : user_img}
                 />
             </Link>
-            <Link to="/" onClick={()=>setToken('')}>
+            <Link to="/" onClick={()=>logout}>
                 <img alt="icone de saída" src={close_img}/>
             </Link>
         </aside>

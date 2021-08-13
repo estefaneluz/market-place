@@ -1,19 +1,51 @@
 import { Typography, TextField } from "@material-ui/core";
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from "../../contexts/AuthContext";
+import { useHistory } from 'react-router-dom';
 import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 import ActionButtons from "../../components/ActionButtons";
 
 export default function EditProfile(){
-    const { register, handleSubmit, formState: { errors } } = useForm();
     const { token, setLoading, user } = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors }, setError } = useForm({
+        defaultValues: user
+    });
+    const [errorMessage, setErrorMessage] = useState('');
+    const history = useHistory();
 
     const styles = useStyles();
 
-    const updateUser = (data) => {
-        console.log(data);
+    const updateUser = async (data) => {
+        if(data.senha !== data.repetir_senha){
+            setError("senha", {type: "validate"}, {shouldFocus: true});
+            setError("repetir_senha", {type:"validate"}, {shouldFocus: false});
+            setErrorMessage("As senhas devem ser iguais!");
+            return;
+        }
+
+        if(!data.nome) data.nome = user.nome; 
+        if(!data.nome_loja) data.nome_loja = user.nome_loja;
+        if(!data.email) data.email = user.email
+
+        setErrorMessage('');
+        setLoading(true);
+        const request = await fetch('https://desafio-m03.herokuapp.com/perfil', {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        setLoading(false);
+        const response = await request.json();
+        console.log(response);
+        if(request.ok) {
+            return history.push('/perfil'); 
+        }
+        return setErrorMessage(response);
     }
     
     return (
@@ -22,16 +54,19 @@ export default function EditProfile(){
         <form className={styles.column} >
             <TextField  
                 {...register("nome", {required: true})}
+                error={!!errors.nome}
                 label="Seu nome" 
                 defaultValue={user.nome}
             />
             <TextField 
                 {...register("nome_loja", {required: true})}
+                error={!!errors.nome_loja}
                 label="Nome da loja"
                 defaultValue={user.nome_loja}
             />
             <TextField 
                 {...register("email", {required: true})}
+                error={!!errors.email}
                 label="E-mail"
                 type="email" 
                 defaultValue={user.email}

@@ -8,10 +8,11 @@ export default function ActionButtons({onSubmit}){
     const history = useHistory();
     const { pathname } = useLocation();
     const link = pathname.includes("produtos") ? "/produtos" : "/perfil"
+    const submitButtonCondition = (pathname.includes("/novo") || pathname.includes("/editar")); 
 
-    const defineRoute = () => {
-        if(pathname.includes("/novo") || pathname.includes("/editar"))
-           return onSubmit();
+    const defineRoute = (e) => {
+        if(submitButtonCondition) 
+           return onSubmit(); 
         else if (pathname === "/perfil") 
             return history.push("/perfil/editar");
         else if (pathname === "/produtos") 
@@ -22,7 +23,7 @@ export default function ActionButtons({onSubmit}){
     <div className="actionButtons">
         <hr/>
         <div className="row">
-            { (pathname.includes("novo") || pathname.includes("editar"))
+            { submitButtonCondition
             && <Link to={link} className={styles.link}>Cancelar</Link> }
             <Button 
                 onClick={() => defineRoute()}
