@@ -67,7 +67,7 @@ export default function Register(){
                 <Password 
                     register={() => register("repetir_senha", {required: true})}
                     error={!!errors.repetir_senha}
-                    id="senha" label="Repita a senha" 
+                    id="repetir_senha" label="Repita a senha" 
                 />
                 {!!errorMessage && 
                 <Alert onClose={() => setErrorMessage('')} severity="error">

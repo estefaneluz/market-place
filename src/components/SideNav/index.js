@@ -16,12 +16,12 @@ export default function SideNav(){
         <aside className="sidenav">
             <Link to="/produtos">
                 <img alt="icone de loja"
-                    src={location.pathname ==="/produtos" ? store_selected_img : store_img} 
+                    src={location.pathname ==="/produtos" || location.pathname ==="/produtos/novo" ? store_selected_img : store_img} 
                 />
             </Link>
             <Link to="/perfil">
                 <img alt="icone de usuário"
-                    src={location.pathname ==="/perfil" ? user_selected_img : user_img}
+                    src={location.pathname ==="/perfil" || location.pathname ==="/perfil/editar"? user_selected_img : user_img}
                 />
             </Link>
             <Link to="/" onClick={()=>setToken('')}>

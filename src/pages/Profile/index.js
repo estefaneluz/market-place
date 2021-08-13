@@ -1,5 +1,6 @@
 import { Typography, TextField } from "@material-ui/core";
 import { useState, useEffect, useContext } from "react";
+import ActionButtons from "../../components/ActionButtons";
 import { AuthContext } from "../../contexts/AuthContext";
 import useStyles  from "../../styles/form"; 
 
@@ -46,6 +47,7 @@ export default function Profile(){
                 type="email" 
                 defaultValue={user.email}
             />
+            <ActionButtons/>
         </form> }
         </>
     );

@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import SideNav from "./components/SideNav";
 import ActionButtons from "./components/ActionButtons";
+import EditProfile from "./pages/EditProfile";
 
 const ProtectedRoutes = (props) => {
   const { token } = useContext(AuthContext);
@@ -35,8 +36,9 @@ export default function Routes() {
               <main className={styles.content}>
                 <Typography variant="h2" component="h1">Loja da Maria</Typography>
                 <Route path="/produtos"/>
-                <Route path="/perfil" component={Profile}/>
-                <ActionButtons/>
+                <Route path="/perfil" exact component={Profile}/>
+                <Route path="/perfil/editar" component={EditProfile}/>
+                {/* <ActionButtons/>  */}
               </main>
             </div>
           </ProtectedRoutes>

@@ -10,7 +10,6 @@ export const useStyles = makeStyles((theme)=>({
         display: "grid", 
         rowGap: 60,
         minWidth: "65vw",
-        minHeight: "100vh",
     }, 
     wrapper: {
         display: "flex",
