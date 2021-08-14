@@ -11,6 +11,7 @@ export default function ActionButtons({onSubmit}){
     const submitButtonCondition = (pathname.includes("/novo") || pathname.includes("/editar")); 
 
     const defineRoute = (e) => {
+        e.preventDefault();
         if(submitButtonCondition) 
            return onSubmit(); 
         else if (pathname === "/perfil") 
@@ -26,7 +27,8 @@ export default function ActionButtons({onSubmit}){
             { submitButtonCondition
             && <Link to={link} className={styles.link}>Cancelar</Link> }
             <Button 
-                onClick={() => defineRoute()}
+                type = {submitButtonCondition ? "submit" : "button"}
+                onClick={(e) => defineRoute(e)}
                 className={styles.button}
                 variant="contained" 
                 color="primary">
