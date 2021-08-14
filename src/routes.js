@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import SideNav from "./components/SideNav";
 import EditProfile from "./pages/EditProfile";
+import Products from "./pages/Products";
 import { getUserData } from "./functions/getUserData";
 
 const ProtectedRoutes = (props) => {
@@ -44,7 +45,7 @@ export default function Routes() {
               <SideNav/>
               <main className={styles.content}>
                 <Typography variant="h2" component="h1">{user.nome_loja}</Typography>
-                <Route path="/produtos"/>
+                <Route path="/produtos" component={Products}/>
                 <Route path="/perfil" exact component={Profile}/>
                 <Route path="/perfil/editar" component={EditProfile}/>
               </main>
