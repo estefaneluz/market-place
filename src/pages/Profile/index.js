@@ -10,8 +10,12 @@ export default function Profile(){
     const styles = useStyles();
 
     useEffect(()=> {
-        getUserData(setLoading, setUser, token);
-    }, [])
+        async function awaitGetUser(){
+            await getUserData(setLoading, setUser, token);
+        }
+        
+        awaitGetUser();
+    }, [setUser]);
 
     return (
         <>
