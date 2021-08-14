@@ -10,6 +10,7 @@ import SideNav from "./components/SideNav";
 import EditProfile from "./pages/EditProfile";
 import Products from "./pages/Products";
 import { getUserData } from "./functions/getUserData";
+import AddProduct from "./pages/AddProduct";
 
 const ProtectedRoutes = (props) => {
   const { token } = useContext(AuthContext);
@@ -45,7 +46,8 @@ export default function Routes() {
               <SideNav/>
               <main className={styles.content}>
                 <Typography variant="h2" component="h1">{user.nome_loja}</Typography>
-                <Route path="/produtos" component={Products}/>
+                <Route path="/produtos" exact component={Products}/>
+                <Route path="/produtos/novo" component={AddProduct}/>
                 <Route path="/perfil" exact component={Profile}/>
                 <Route path="/perfil/editar" component={EditProfile}/>
               </main>
