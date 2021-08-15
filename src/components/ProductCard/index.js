@@ -7,11 +7,10 @@ import trashIcon from "../../assets/trash.svg";
 import { getProducts } from "../../functions/getProducts";
 
 export default function ProductCard({product, setProducts}) {
-    const { token, setLoading } = useContext(AuthContext);
+    const { token, setLoading, setErrorMessage } = useContext(AuthContext);
     const styles = useStyles();
     const history = useHistory();
     const [open, setOpen] = useState(false);
-    const [error, setError] = useState('');
 
     const handleClose = () => {
         setOpen(false);
@@ -24,7 +23,7 @@ export default function ProductCard({product, setProducts}) {
 
     const deleteProduct = async () => {
         setLoading(true);
-        setError('');
+        setErrorMessage('');
         const request = await fetch(`https://desafio-m03.herokuapp.com/produtos/${product.id}`, {
             method: "DELETE",
             headers: {
@@ -39,7 +38,7 @@ export default function ProductCard({product, setProducts}) {
             return await getProducts(setLoading, setProducts, token);
         }
         const response = await request.json();
-        return setError(response);
+        return setErrorMessage(response);
     }
 
     return (
@@ -115,7 +114,7 @@ export default function ProductCard({product, setProducts}) {
                     Manter Produto
                 </Button>
                 <Button 
-                onClick={()=>deleteProduct(setLoading, setError, token, history, product.id)}
+                onClick={()=>deleteProduct()}
                 className={styles.secondary}
                 variant="contained" color="secondary">
                     Deletar
