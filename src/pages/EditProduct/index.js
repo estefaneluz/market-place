@@ -13,9 +13,7 @@ export default function EditProduct(){
     const { id } = useParams("/produtos/:id/editar");
     const styles = useStyles();
 
-    const { register, handleSubmit, formState: { errors }, setError } = useForm({
-        defaultValues: product
-    });
+    const { register, handleSubmit, formState: { errors }, setError } = useForm();
 
     useEffect(()=>{
         const getProduct = async () => {           
@@ -36,7 +34,23 @@ export default function EditProduct(){
     }, []);
 
     const editProduct = async (data) => {
-        console.log(data);
+        if(data.estoque.includes(".") || data.estoque.includes(",")){
+            setError("estoque", {type: "validate"}, {shouldFocus: true}); 
+            //colocar aqui um estado de error com a mensagem "O estoque precisa ser um numero inteiro."
+            return; 
+        }
+
+        if(!data.nome) data.nome = product.nome;
+        if(!data.estoque) data.estoque = product.estoque;
+        if(!data.descricao) data.descricao = product.descricao; 
+
+        if(!data.preco) {
+            data.preco = product.preco;
+        } else {
+            data.preco = data.preco * 100;
+        }
+
+        
     }
 
     return(
@@ -48,7 +62,7 @@ export default function EditProduct(){
                 <TextField  
                     label="Nome do produto" 
                     defaultValue={product.nome}
-                    {...register("nome", {required: true})}
+                    {...register("nome")}
                     error={!!errors.nome}
                 />
                 <div className="row">
@@ -62,7 +76,7 @@ export default function EditProduct(){
                             id="preco"
                             startAdornment={<InputAdornment position="start">R$</InputAdornment>}
                             defaultValue={(product.preco/100)}
-                            {...register("preco", {required: true}, {valueAsNumber: true})}
+                            {...register("preco", {valueAsNumber: true})}
                             error={!!errors.preco}
                         />
                     </FormControl>
@@ -76,7 +90,7 @@ export default function EditProduct(){
                             id="estoque"
                             startAdornment={<InputAdornment position="start">Un</InputAdornment>}
                             defaultValue={product.estoque}
-                            {...register("estoque", {required: true}, {valueAsNumber: true})}
+                            {...register("estoque", {valueAsNumber: true})}
                             error={!!errors.estoque}
                         />
                     </FormControl>
@@ -84,7 +98,7 @@ export default function EditProduct(){
                 <TextField 
                     label="Descrição do produto"
                     defaultValue={product.descricao}
-                    {...register("descricao", {required: true})}
+                    {...register("descricao")}
                     error={!!errors.descricao}
                 />
                 <TextField 
