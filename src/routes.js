@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import { Backdrop, CircularProgress, Typography } from "@material-ui/core"
+import { Backdrop, CircularProgress, Typography, Snackbar } from "@material-ui/core"
+import { Alert } from '@material-ui/lab'
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import { useStyles } from "./styles/routesStyles";
@@ -23,8 +24,9 @@ const ProtectedRoutes = (props) => {
 export default function Routes() {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [user, setUser] = useState({});
-  const valueContext = { token, setToken, loading, setLoading, user, setUser }
+  const valueContext = { token, setToken, loading, setLoading, user, setUser, setErrorMessage }
   const styles = useStyles();
 
   useEffect(() => {
@@ -36,6 +38,14 @@ export default function Routes() {
       awaitGetUser();
     }
   }, [token]);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setErrorMessage('');
+  };
   
   return (
     <AuthContext.Provider value={valueContext}>
@@ -58,6 +68,12 @@ export default function Routes() {
             </div>
           </ProtectedRoutes>
         </Switch>
+
+        <Snackbar open={!!errorMessage} autoHideDuration={4000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {errorMessage}
+        </Alert>
+      </Snackbar>
 
         <Backdrop className={styles.backdrop} open={loading} onClick={()=>setLoading(false)}>
               <CircularProgress color="inherit" />

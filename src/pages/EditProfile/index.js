@@ -8,11 +8,10 @@ import Password from "../../components/Password";
 import ActionButtons from "../../components/ActionButtons";
 
 export default function EditProfile(){
-    const { token, setLoading, user } = useContext(AuthContext);
+    const { token, setLoading, user, setErrorMessage } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors }, setError } = useForm({
         defaultValues: user
     });
-    const [errorMessage, setErrorMessage] = useState('');
     const history = useHistory();
 
     const styles = useStyles();
