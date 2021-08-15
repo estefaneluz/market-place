@@ -9,7 +9,7 @@ import "./styles.css"
 
 export default function AddProduct(){
     const { register, handleSubmit, formState: { errors }, setError } = useForm();
-    const { setLoading, token } = useContext(AuthContext); 
+    const { setLoading, token, setErrorMessage } = useContext(AuthContext); 
 
     const history = useHistory();
     const styles = useStyles();
@@ -17,9 +17,10 @@ export default function AddProduct(){
     const handleAddProduct = async (data) => {
         if(data.estoque.includes(".") || data.estoque.includes(",")){
             setError("estoque", {type: "validate"}, {shouldFocus: true}); 
-            //colocar aqui um estado de error com a mensagem "O estoque precisa ser um numero inteiro."
+            setErrorMessage("O estoque precisa ser um número inteiro.");
             return; 
         }
+
         data.preco = data.preco * 100;
 
         setLoading(true);
@@ -37,7 +38,7 @@ export default function AddProduct(){
             return history.push("/produtos");
         
         const response = await request.json();
-        console.log(response);
+        setErrorMessage(response);
     }
 
     return(
