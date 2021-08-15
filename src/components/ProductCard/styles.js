@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme)=>({
     root: {
       width: 200,
       height: 380,
@@ -37,5 +37,36 @@ export const useStyles = makeStyles({
     },
     bold: {
         fontWeight: "bold"
+    },
+
+    
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      borderRadius: 5,
+      padding: theme.spacing(2, 4, 3),
+      height: 188,
+      display: "grid"
+    },
+    primary: {
+      backgroundColor: "#007DFF",
+      "&:hover": {
+          backgroundColor: "#0471E3"
+      }
+    },
+    secondary: {
+      backgroundColor: "#FF505F",
+      marginLeft: 10,
+      "&:hover": {
+          backgroundColor: "#fc3545"
+      }
+    },
+    containerBtn: {
+      justifySelf: "end"    
     }
-  });
+  }));
