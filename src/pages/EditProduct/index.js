@@ -1,7 +1,7 @@
 import { Typography, TextField, InputAdornment, Input, InputLabel, FormControl } from "@material-ui/core";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import ActionButtons from "../../components/ActionButtons";
 import useStyles  from "../../styles/form"; 
@@ -11,6 +11,7 @@ export default function EditProduct(){
     const [product, setProduct] = useState({});
     const { setLoading, token } = useContext(AuthContext); 
     const { id } = useParams("/produtos/:id/editar");
+    const history = useHistory();
     const styles = useStyles();
 
     const { register, handleSubmit, formState: { errors }, setError } = useForm();
@@ -34,15 +35,19 @@ export default function EditProduct(){
     }, []);
 
     const editProduct = async (data) => {
-        if(data.estoque.includes(".") || data.estoque.includes(",")){
-            setError("estoque", {type: "validate"}, {shouldFocus: true}); 
-            //colocar aqui um estado de error com a mensagem "O estoque precisa ser um numero inteiro."
-            return; 
-        }
-
+    
         if(!data.nome) data.nome = product.nome;
-        if(!data.estoque) data.estoque = product.estoque;
-        if(!data.descricao) data.descricao = product.descricao; 
+        if(!data.descricao) data.descricao = product.descricao;
+
+        if(!data.estoque) {
+            data.estoque = product.estoque; 
+        } else {
+            if(data.estoque.includes(".") || data.estoque.includes(",")){
+                setError("estoque", {type: "validate"}, {shouldFocus: true}); 
+                //colocar aqui um estado de error com a mensagem "O estoque precisa ser um numero inteiro."
+                return; 
+            }
+        }
 
         if(!data.preco) {
             data.preco = product.preco;
@@ -50,7 +55,22 @@ export default function EditProduct(){
             data.preco = data.preco * 100;
         }
 
+        console.log(data);
+        setLoading(true);
+        const request = await fetch(`https://desafio-m03.herokuapp.com/produtos/${id}`, {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        setLoading(false);
         
+        if(request.ok) return history.push("/produtos");
+
+        const response = await request.json();
+        console.log(response)
     }
 
     return(
