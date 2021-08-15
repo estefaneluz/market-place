@@ -1,7 +1,8 @@
 import { Typography, TextField, InputAdornment, Input, InputLabel, FormControl } from "@material-ui/core";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import ActionButtons from "../../components/ActionButtons";
 import useStyles  from "../../styles/form"; 
 import "./styles.css"
@@ -9,14 +10,15 @@ import "./styles.css"
 export default function EditProduct(){
     const [product, setProduct] = useState({});
     const { setLoading, token } = useContext(AuthContext); 
-    const params = useParams("/produtos/:id/editar");
-    const history = useHistory();
+    const { id } = useParams("/produtos/:id/editar");
     const styles = useStyles();
 
+    const { register, handleSubmit, formState: { errors }, setError } = useForm({
+        defaultValues: product
+    });
+
     useEffect(()=>{
-        const getProduct = async () => {
-            const { id } = params;
-            
+        const getProduct = async () => {           
             setLoading(true);
             const request = await fetch(`https://desafio-m03.herokuapp.com/produtos/${id}`, {
                 method: "GET",
@@ -27,12 +29,15 @@ export default function EditProduct(){
             setLoading(false);
 
             const response = await request.json();
-            console.log(response);
             setProduct(response);
         }
 
         getProduct();
-    }, [])
+    }, []);
+
+    const editProduct = async (data) => {
+        console.log(data);
+    }
 
     return(
         <>
@@ -43,40 +48,52 @@ export default function EditProduct(){
                 <TextField  
                     label="Nome do produto" 
                     defaultValue={product.nome}
+                    {...register("nome", {required: true})}
+                    error={!!errors.nome}
                 />
                 <div className="row">
                     <FormControl>
-                        <InputLabel htmlFor="preco">
+                        <InputLabel error={!!errors.preco} htmlFor="preco">
                             Preço
                         </InputLabel>
                         
                         <Input 
+                            type="number"
                             id="preco"
                             startAdornment={<InputAdornment position="start">R$</InputAdornment>}
                             defaultValue={(product.preco/100)}
+                            {...register("preco", {required: true}, {valueAsNumber: true})}
+                            error={!!errors.preco}
                         />
                     </FormControl>
                     <FormControl>
-                        <InputLabel htmlFor="estoque">
+                        <InputLabel error={!!errors.estoque} htmlFor="estoque">
                             Estoque
                         </InputLabel>
                         
                         <Input 
+                            type="number"
                             id="estoque"
                             startAdornment={<InputAdornment position="start">Un</InputAdornment>}
                             defaultValue={product.estoque}
+                            {...register("estoque", {required: true}, {valueAsNumber: true})}
+                            error={!!errors.estoque}
                         />
                     </FormControl>
                 </div>
                 <TextField 
                     label="Descrição do produto"
                     defaultValue={product.descricao}
+                    {...register("descricao", {required: true})}
+                    error={!!errors.descricao}
                 />
                 <TextField 
                     label="Imagem"
                     defaultValue={product.imagem}
+                    {...register("imagem")}
+                    error={!!errors.imagem}
                 />
-                <ActionButtons/>
+                <ActionButtons onSubmit={handleSubmit(editProduct)}/>
             </form>}
             <img 
             className="img-product"
