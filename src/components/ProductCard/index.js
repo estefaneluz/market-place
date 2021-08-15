@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Card, CardContent, CardMedia, Typography, Modal, Backdrop, Fade, Button } from "@material-ui/core";
+import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from 'react-router-dom'
 import { useStyles } from "./styles";
 import trashIcon from "../../assets/trash.svg";
+import { getProducts } from "../../functions/getProducts";
 
-export default function ProductCard({product}) {
+export default function ProductCard({product, setProducts}) {
+    const { token, setLoading } = useContext(AuthContext);
     const styles = useStyles();
     const history = useHistory();
     const [open, setOpen] = useState(false);
+    const [error, setError] = useState('');
 
     const handleClose = () => {
         setOpen(false);
@@ -16,6 +20,26 @@ export default function ProductCard({product}) {
     const handleOpen = (e) => {
         e.stopPropagation();
         setOpen(true);
+    }
+
+    const deleteProduct = async () => {
+        setLoading(true);
+        setError('');
+        const request = await fetch(`https://desafio-m03.herokuapp.com/produtos/${product.id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+    
+        setLoading(false);
+        
+        if(request.ok){
+            handleClose();
+            return await getProducts(setLoading, setProducts, token);
+        }
+        const response = await request.json();
+        return setError(response);
     }
 
     return (
@@ -91,6 +115,7 @@ export default function ProductCard({product}) {
                     Manter Produto
                 </Button>
                 <Button 
+                onClick={()=>deleteProduct(setLoading, setError, token, history, product.id)}
                 className={styles.secondary}
                 variant="contained" color="secondary">
                     Deletar

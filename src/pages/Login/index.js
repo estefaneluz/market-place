@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext';
 import { Alert } from '@material-ui/lab';
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
 import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 

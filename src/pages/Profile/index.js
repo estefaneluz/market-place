@@ -15,7 +15,7 @@ export default function Profile(){
         }
         
         awaitGetUser();
-    }, [setUser]);
+    }, []);
 
     return (
         <>

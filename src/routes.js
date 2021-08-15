@@ -31,8 +31,10 @@ export default function Routes() {
     async function awaitGetUser(){
       await getUserData(setLoading, setUser, token);
     }
-    
-    awaitGetUser();
+
+    if(token){
+      awaitGetUser();
+    }
   }, [token]);
   
   return (
