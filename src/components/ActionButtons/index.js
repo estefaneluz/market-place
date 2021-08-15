@@ -9,6 +9,7 @@ export default function ActionButtons({onSubmit}){
     const styles = useStyles();
     const history = useHistory();
     const { pathname } = useLocation();
+    
     const link = pathname.includes("produtos") ? "/produtos" : "/perfil"
     const submitButtonCondition = (pathname.includes("/novo") || pathname.includes("/editar")); 
 
