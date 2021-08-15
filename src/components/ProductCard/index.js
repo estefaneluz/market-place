@@ -78,7 +78,7 @@ export default function ProductCard({product, setProducts}) {
                     <Typography 
                     variant="body2" color="textPrimary" component="p"
                     className={styles.bold}>
-                        R$ {product.preco}
+                        R$ {(product.preco/100)}
                     </Typography>
                 </div>
             </CardContent>
