@@ -1,22 +1,21 @@
 import { Typography, TextField } from "@material-ui/core";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { getUserData } from "../../functions/getUserData";
 import useStyles from "../../styles/form";
 import Password from "../../components/Password";
 import ActionButtons from "../../components/ActionButtons";
 
 export default function EditProfile() {
-  const { token, setLoading, user, setErrorMessage } = useContext(AuthContext);
+  const { token, setLoading, user, setUser, setErrorMessage } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm({
-    defaultValues: user,
-  });
+  } = useForm();
   const history = useHistory();
 
   const styles = useStyles();
@@ -40,7 +39,7 @@ export default function EditProfile() {
       body: JSON.stringify(data),
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
     setLoading(false);
@@ -58,32 +57,32 @@ export default function EditProfile() {
       </Typography>
       <form className={styles.column}>
         <TextField
-          {...register("nome", { required: true })}
+          {...register("nome")}
           error={!!errors.nome}
           label="Seu nome"
           defaultValue={user.nome}
         />
         <TextField
-          {...register("nome_loja", { required: true })}
+          {...register("nome_loja")}
           error={!!errors.nome_loja}
           label="Nome da loja"
           defaultValue={user.nome_loja}
         />
         <TextField
-          {...register("email", { required: true })}
+          {...register("email")}
           error={!!errors.email}
           label="E-mail"
           type="email"
           defaultValue={user.email}
         />
         <Password
-          register={() => register("senha", { required: true })}
+          register={() => register("senha")}
           error={!!errors.senha}
           id="senha"
           label="Nova senha"
         />
         <Password
-          register={() => register("repetir_senha", { required: true })}
+          register={() => register("repetir_senha")}
           error={!!errors.senha}
           id="repetir_senha"
           label="Repita a nova senha"
