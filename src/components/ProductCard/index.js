@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useStyles } from "./styles";
 import trashIcon from "../../assets/trash.svg";
 
-export default function ProductCard(props) {
+export default function ProductCard({product}) {
     const styles = useStyles();
     const history = useHistory();
     const [open, setOpen] = useState(false);
@@ -20,10 +20,10 @@ export default function ProductCard(props) {
 
     return (
     <>
-        <Card className={styles.root} onClick={()=>history.push(`/produtos/${props.id}/editar`)}>
+        <Card className={styles.root} onClick={()=>history.push(`/produtos/${product.id}/editar`)}>
             <CardMedia
             className={styles.media}
-            image="https://aloalobahia.com/images/p/pizzadiadapizza_alo_alo_bahia.jpg"
+            image={product.imagem}
             title="Contemplative Reptile"
             >
                 <img 
@@ -36,25 +36,25 @@ export default function ProductCard(props) {
                 <Typography 
                 className={styles.text} 
                 gutterBottom variant="h6" component="h3">
-                    Lizard
+                    {product.nome}
                 </Typography>
                 <Typography  
                 className={styles.text} 
                 variant="body2" color="textPrimary" component="p">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    {product.descricao}
                 </Typography>
 
                 <div className={styles.cardFooter}>
                     <Typography 
                     variant="body2" color="textSecondary" component="p"
                     className={styles.upper}>
-                        3 Unidades
+                        {product.estoque} Unidades
                     </Typography>
 
                     <Typography 
                     variant="body2" color="textPrimary" component="p"
                     className={styles.bold}>
-                        R$ 99.99
+                        R$ {product.preco}
                     </Typography>
                 </div>
             </CardContent>
