@@ -11,9 +11,14 @@ export default function ProductCard() {
         setOpen(false);
     };
 
+    const handleOpen = (e) => {
+        e.stopPropagation();
+        setOpen(true);
+    }
+
     return (
     <>
-        <Card className={styles.root}>
+        <Card className={styles.root} onClick={()=>console.log("oii")}>
             <CardMedia
             className={styles.media}
             image="https://aloalobahia.com/images/p/pizzadiadapizza_alo_alo_bahia.jpg"
@@ -21,7 +26,7 @@ export default function ProductCard() {
             >
                 <img 
                     src={trashIcon} className={styles.redCircle} 
-                    onClick={()=>setOpen(true)}
+                    onClick={(e) => handleOpen(e)}
                 />
             </CardMedia>
 

@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme)=>({
       width: 200,
       height: 380,
       borderRadius: 24,
+      cursor: "pointer",
     },
     media: {
       height: 240,
