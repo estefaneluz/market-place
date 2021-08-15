@@ -1,17 +1,17 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles((theme)=>({
-    backdrop: {
-        zIndex: theme.zIndex.drawer + 3,
-        color: '#fff',
-    },
-    content: {
-        padding: "78px 0 0 78px",
-        display: "grid", 
-        rowGap: 60,
-        minWidth: "65vw",
-    }, 
-    wrapper: {
-        display: "flex",
-    }
+export const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 3,
+    color: "#fff",
+  },
+  content: {
+    padding: "78px 0 0 78px",
+    display: "grid",
+    rowGap: 60,
+    minWidth: "65vw",
+  },
+  wrapper: {
+    display: "flex",
+  },
 }));
