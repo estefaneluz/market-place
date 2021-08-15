@@ -5,11 +5,17 @@ import useStyles  from "../../styles/form";
 import "./styles.css"
 
 export default function AddProduct(){
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, setError } = useForm();
     const styles = useStyles();
 
     const handleAddProduct = (data) => {
-        console.log(data);
+        if(data.estoque.includes(".") || data.estoque.includes(",")){
+            setError("estoque", {type: "validate"}, {shouldFocus: true}); 
+            //colocar aqui um estado de error com a mensagem "O estoque precisa ser um numero inteiro."
+            return; 
+        }
+        data.preco = data.preco * 100;
+        
     }
 
     return(
