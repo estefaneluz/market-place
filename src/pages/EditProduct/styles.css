@@ -1,0 +1,9 @@
+.row {
+    display: flex;
+}
+
+.img-product{
+    margin-left: 40px;
+    max-width: 400px;
+    border-radius: 16px;
+}

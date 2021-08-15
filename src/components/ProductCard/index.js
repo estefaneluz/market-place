@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Card, CardContent, CardMedia, Typography, Modal, Backdrop, Fade, Button } from "@material-ui/core";
+import { useHistory } from 'react-router-dom'
 import { useStyles } from "./styles";
 import trashIcon from "../../assets/trash.svg";
 
-export default function ProductCard() {
+export default function ProductCard(props) {
     const styles = useStyles();
+    const history = useHistory();
     const [open, setOpen] = useState(false);
 
     const handleClose = () => {
@@ -18,7 +20,7 @@ export default function ProductCard() {
 
     return (
     <>
-        <Card className={styles.root} onClick={()=>console.log("oii")}>
+        <Card className={styles.root} onClick={()=>history.push(`/produtos/${props.id}/editar`)}>
             <CardMedia
             className={styles.media}
             image="https://aloalobahia.com/images/p/pizzadiadapizza_alo_alo_bahia.jpg"

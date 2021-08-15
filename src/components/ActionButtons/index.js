@@ -32,7 +32,7 @@ export default function ActionButtons({onSubmit}){
                 className={styles.button}
                 variant="contained" 
                 color="primary">
-                {pathname.includes("produto") ? "Adicionar Produto" : "Editar perfil"}
+                {pathname.includes("editar") ? "Salvar Alterações" : "Adicionar Produto"}
             </Button>
         </div>
     </div>);

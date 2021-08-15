@@ -11,6 +11,7 @@ import EditProfile from "./pages/EditProfile";
 import Products from "./pages/Products";
 import { getUserData } from "./functions/getUserData";
 import AddProduct from "./pages/AddProduct";
+import EditProduct from "./pages/EditProduct";
 
 const ProtectedRoutes = (props) => {
   const { token } = useContext(AuthContext);
@@ -48,6 +49,7 @@ export default function Routes() {
                 <Typography variant="h2" component="h1">{user.nome_loja}</Typography>
                 <Route path="/produtos" exact component={Products}/>
                 <Route path="/produtos/novo" component={AddProduct}/>
+                <Route path="/produtos/:id/editar" component={EditProduct}/>
                 <Route path="/perfil" exact component={Profile}/>
                 <Route path="/perfil/editar" component={EditProfile}/>
               </main>
