@@ -1,21 +1,43 @@
 import { Typography, TextField, InputAdornment, Input, InputLabel, FormControl } from "@material-ui/core";
-import { useForm } from 'react-hook-form'
+import { useState, useContext } from 'react';
+import { AuthContext } from "../../contexts/AuthContext";
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import ActionButtons from "../../components/ActionButtons";
 import useStyles  from "../../styles/form"; 
 import "./styles.css"
 
 export default function AddProduct(){
     const { register, handleSubmit, formState: { errors }, setError } = useForm();
+    const { setLoading, token } = useContext(AuthContext); 
+
+    const history = useHistory();
     const styles = useStyles();
 
-    const handleAddProduct = (data) => {
+    const handleAddProduct = async (data) => {
         if(data.estoque.includes(".") || data.estoque.includes(",")){
             setError("estoque", {type: "validate"}, {shouldFocus: true}); 
             //colocar aqui um estado de error com a mensagem "O estoque precisa ser um numero inteiro."
             return; 
         }
         data.preco = data.preco * 100;
+
+        setLoading(true);
+        const request = await fetch("https://desafio-m03.herokuapp.com/produtos", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        });
+        setLoading(false);
+
+        if(request.ok) 
+            return history.push("/produtos");
         
+        const response = await request.json();
+        console.log(response);
     }
 
     return(
