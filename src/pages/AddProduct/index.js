@@ -23,6 +23,7 @@ export default function AddProduct(){
 
         data.preco = data.preco * 100;
 
+        setErrorMessage('');
         setLoading(true);
         const request = await fetch("https://desafio-m03.herokuapp.com/produtos", {
             method: "POST",

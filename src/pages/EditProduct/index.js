@@ -55,7 +55,7 @@ export default function EditProduct(){
             data.preco = data.preco * 100;
         }
 
-        
+        setErrorMessage('');
         setLoading(true);
         const request = await fetch(`https://desafio-m03.herokuapp.com/produtos/${id}`, {
             method: "PUT",
