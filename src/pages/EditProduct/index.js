@@ -9,7 +9,7 @@ import "./styles.css"
 
 export default function EditProduct(){
     const [product, setProduct] = useState({});
-    const { setLoading, token } = useContext(AuthContext); 
+    const { setLoading, token, setErrorMessage } = useContext(AuthContext); 
     const { id } = useParams("/produtos/:id/editar");
     const history = useHistory();
     const styles = useStyles();
@@ -44,7 +44,7 @@ export default function EditProduct(){
         } else {
             if(data.estoque.includes(".") || data.estoque.includes(",")){
                 setError("estoque", {type: "validate"}, {shouldFocus: true}); 
-                //colocar aqui um estado de error com a mensagem "O estoque precisa ser um numero inteiro."
+                setErrorMessage("O estoque precisa ser um número inteiro.");
                 return; 
             }
         }
@@ -55,7 +55,7 @@ export default function EditProduct(){
             data.preco = data.preco * 100;
         }
 
-        console.log(data);
+        
         setLoading(true);
         const request = await fetch(`https://desafio-m03.herokuapp.com/produtos/${id}`, {
             method: "PUT",
@@ -70,7 +70,7 @@ export default function EditProduct(){
         if(request.ok) return history.push("/produtos");
 
         const response = await request.json();
-        console.log(response)
+        setErrorMessage(response);
     }
 
     return(
