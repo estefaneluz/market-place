@@ -52,6 +52,7 @@ export default function ProductCard({product, setProducts}) {
                 <img 
                     src={trashIcon} className={styles.redCircle} 
                     onClick={(e) => handleOpen(e)}
+                    alt="Icone para deletar o produto."
                 />
             </CardMedia>
 

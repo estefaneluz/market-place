@@ -131,6 +131,7 @@ export default function EditProduct(){
             </form>}
             <img 
             className="img-product"
+            alt={product.name}
             src={product.imagem}/>
         </div> 
         </>
