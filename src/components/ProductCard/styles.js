@@ -52,7 +52,8 @@ export const useStyles = makeStyles((theme)=>({
       borderRadius: 5,
       padding: theme.spacing(2, 4, 3),
       height: 188,
-      display: "grid"
+      display: "grid",
+      outline: "none",
     },
     primary: {
       backgroundColor: "#007DFF",

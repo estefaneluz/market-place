@@ -18,7 +18,7 @@ export default function Products(){
         <>
         <Typography variant="h4" component="h2"> Seus produtos </Typography>
         <div className="container-card">
-            {products.map( product => (<ProductCard product={product} setProducts={setProducts}/>))}
+            {products.map( product => (<ProductCard key={product.nome} product={product} setProducts={setProducts}/>))}
         </div>
         <ActionButtons/>
         </>

@@ -48,7 +48,7 @@ export default function ProductCard({product, setProducts}) {
             <CardMedia
             className={styles.media}
             image={product.imagem}
-            title="Contemplative Reptile"
+            title={product.nome}
             >
                 <img 
                     src={trashIcon} className={styles.redCircle} 
